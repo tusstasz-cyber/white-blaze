@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0d12">
+<title>WHITE BLAZE | Inteligência Estatística</title>
+<style>
+:root{color-scheme:dark;--bg:#0b0d12;--panel:#141923;--panel2:#10151d;--line:#283243;--muted:#9ba8ba;--text:#f4f7fb;--gold:#e9c66b;--green:#37c995;--red:#ef5965;--white:#f2f3f5;--black:#5c6678;--blue:#76a9ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -10%,#253149 0,#0b0d12 48%);color:var(--text);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1050px;margin:auto;padding:24px 15px 48px}.brand{text-align:center;padding:12px 0 22px}.mark{width:54px;height:54px;margin:auto auto 10px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(145deg,#fff,#9ea9ba);color:#10141b;font-size:29px;font-weight:950;box-shadow:0 8px 32px #0008}.brand h1{margin:0;font-size:26px;letter-spacing:4px}.brand p{margin:5px 0;color:var(--muted);font-size:11px;letter-spacing:1.8px;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:1fr;gap:13px}.panel{background:linear-gradient(145deg,#171e29,#121720);border:1px solid var(--line);border-radius:17px;padding:17px;box-shadow:0 12px 32px #0003}.panel h2{font-size:13px;letter-spacing:1px;margin:0 0 14px;color:#dce5f2}.sub{color:var(--muted);font-size:12px}.buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.result{border:0;border-radius:12px;padding:15px 5px;font-weight:850;font-size:14px;cursor:pointer;transition:.15s}.result:active{transform:scale(.97)}.white{background:#f1f2f4;color:#12151b}.red{background:#d94350;color:#fff}.black{background:#343d4d;color:#fff;border:1px solid #667187}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.stat{background:#0d121a;border:1px solid #263244;border-radius:12px;padding:12px}.stat small{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.8px}.stat strong{font-size:23px;display:block;margin-top:3px}.gold{color:var(--gold)}.green{color:var(--green)}.muted{color:var(--muted)}
+.bar{height:9px;background:#293242;border-radius:10px;overflow:hidden;display:flex;margin:12px 0 7px}.bar span:nth-child(1){background:#f1f2f4}.bar span:nth-child(2){background:#d94350}.bar span:nth-child(3){background:#68758a}.legend{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
+.history{display:flex;gap:6px;flex-wrap:wrap;min-height:30px}.chip{width:27px;height:27px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:900}.chip.w{background:#f1f2f4;color:#111}.chip.r{background:#d94350}.chip.b{background:#394456;border:1px solid #718097}
+.signal{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:#0d121a;border:1px solid #2c394d;border-radius:14px;padding:15px}.signal-ball{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:27px;font-weight:900;flex:none;border:2px solid #647086}.signal-ball.w{background:#f1f2f4;color:#111;border-color:#fff}.signal-ball.r{background:#d94350;color:white;border-color:#f27680}.signal-ball.b{background:#394456;color:white;border-color:#8290a7}.signal-ball.none{background:#252c38;color:#9ba8ba}.signal-main{flex:1;min-width:150px}.signal-main strong{display:block;font-size:21px}.tag{display:inline-block;border-radius:30px;padding:4px 9px;font-size:10px;font-weight:800;letter-spacing:.6px;background:#263244;color:#c8d6e9}.tag.wait{background:#3a3020;color:#f0d18a}.tag.good{background:#15382f;color:#8ce2c1}
+.meter{height:8px;background:#293242;border-radius:10px;overflow:hidden;margin-top:8px}.meter span{display:block;height:100%;width:0;background:linear-gradient(90deg,#6d8fc8,#55d1a2);transition:width .25s}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.secondary{background:#252e3c;color:#edf3fb;border:1px solid #3b4960;border-radius:10px;padding:9px 12px;cursor:pointer;font:inherit;font-size:12px}.field{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.field label{font-size:11px;color:var(--muted)}select{background:#0d121a;border:1px solid #3a4659;border-radius:9px;color:#fff;padding:9px}
+.twocol{display:grid;grid-template-columns:1fr;gap:13px}.strategy{padding:11px 0;border-top:1px solid #293243}.strategy:first-of-type{border-top:0}.strategy b{font-size:13px}.strategy p{margin:4px 0 0;color:var(--muted);font-size:12px}.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{text-align:left;padding:9px 6px;border-bottom:1px solid #293243}.table th{color:var(--muted);font-weight:600}.warning{border-color:#65512b;background:linear-gradient(145deg,#211d14,#171710)}.warning h2{color:var(--gold)}footer{text-align:center;color:#748094;font-size:10px;margin-top:22px}
+@media(min-width:700px){.grid{grid-template-columns:1.1fr .9fr}.twocol{grid-template-columns:1fr 1fr}.stats{grid-template-columns:repeat(4,1fr)}.span2{grid-column:span 2}}
+</style>
+</head>
+<body><main>
+<header class="brand"><div class="mark">W</div><h1>WHITE BLAZE</h1><p>Inteligência estatística · painel de tendências</p></header>
+<div class="grid">
+<section class="panel"><h2>01 / REGISTRAR RESULTADO</h2><div class="buttons">
+<button class="result white" onclick="add('W')">⚪ BRANCO</button><button class="result red" onclick="add('R')">🔴 VERMELHO</button><button class="result black" onclick="add('B')">⚫ PRETO</button></div>
+<p class="sub">Registre cada rodada manualmente, sempre na ordem em que ocorreu. O resultado mais recente fica primeiro no histórico.</p>
+<div class="actions"><button class="secondary" onclick="undo()">↶ Desfazer último</button><button class="secondary" onclick="clearAll()">Limpar histórico</button></div>
+</section>
+<section class="panel"><h2>02 / SINAL AUTOMÁTICO PARA A PRÓXIMA RODADA</h2>
+<div id="feedStatus" class="sub" style="margin-bottom:10px">● Fonte externa: conectando...</div>
+<div class="actions" style="margin:0 0 12px"><button class="secondary" onclick="syncNow()">↻ Atualizar agora</button><button class="secondary" onclick="toggleAuto()" id="autoButton">Pausar atualização automática</button></div>
+<div class="signal"><div id="signalBall" class="signal-ball none">?</div><div class="signal-main"><span id="signalTag" class="tag wait">AGUARDANDO DADOS</span><strong id="signalName">Sem sinal</strong><span class="sub" id="signalReason">Registre pelo menos 30 resultados para iniciar a leitura experimental.</span></div></div>
+<div class="sub" style="margin-top:12px">Força do conjunto de evidências (não é probabilidade de acerto)</div><div class="meter"><span id="strength"></span></div><div class="legend"><span id="strengthText">Dados insuficientes</span><span id="sampleText">0 amostras</span></div>
+<p class="sub" id="signalDisclaimer">O indicador resume padrões passados. Não prevê o resultado real.</p>
+</section>
+</div>
+<section class="panel"><h2>03 / RESUMO ESTATÍSTICO</h2><div class="stats">
+<div class="stat"><small>Rodadas registradas</small><strong id="total">0</strong></div><div class="stat"><small>Branco</small><strong id="whites">0</strong></div><div class="stat"><small>Vermelho</small><strong id="reds">0</strong></div><div class="stat"><small>Preto</small><strong id="blacks">0</strong></div></div>
+<div class="bar"><span id="bw"></span><span id="br"></span><span id="bb"></span></div><div class="legend"><span>⚪ <b id="pw">0%</b></span><span>🔴 <b id="pr">0%</b></span><span>⚫ <b id="pb">0%</b></span></div>
+</section>
+<div class="twocol">
+<section class="panel"><h2>04 / JANELAS DE TENDÊNCIA</h2><div class="field"><label for="window">Analisar últimos</label><select id="window" onchange="render()"><option value="10">10 resultados</option><option value="20" selected>20 resultados</option><option value="50">50 resultados</option><option value="100">100 resultados</option></select></div>
+<table class="table"><thead><tr><th>Cor</th><th>Frequência</th><th>Percentual</th></tr></thead><tbody id="windowStats"><tr><td colspan="3">Sem dados.</td></tr></tbody></table>
+<p class="sub" id="windowNote">A janela mostra apenas frequência observada.</p></section>
+<section class="panel"><h2>05 / PADRÕES E SEQUÊNCIAS</h2><div class="stats">
+<div class="stat"><small>Última cor</small><strong id="lastColor">—</strong></div><div class="stat"><small>Sequência atual</small><strong id="streak">—</strong></div><div class="stat"><small>Maior sequência</small><strong id="maxStreak">—</strong></div><div class="stat"><small>Trocas recentes</small><strong id="switches">—</strong></div></div><p class="sub" id="patternNote">Registre resultados para analisar sequências.</p></section>
+</div>
+<section class="panel"><h2>06 / MATRIZ DE TRANSIÇÃO</h2><p class="sub">Mostra qual cor apareceu depois de cada cor no seu histórico. Percentuais calculados somente quando existe uma transição observada.</p>
+<table class="table"><thead><tr><th>Depois de</th><th>⚪ Branco</th><th>🔴 Vermelho</th><th>⚫ Preto</th><th>Total</th></tr></thead><tbody id="transitions"></tbody></table>
+</section>
+<section class="panel"><h2>07 / HISTÓRICO RECENTE</h2><div class="history" id="history"><span class="muted">Nenhum resultado registrado.</span></div><p class="sub">Últimos 60 resultados.</p></section>
+<div class="twocol">
+<section class="panel"><h2>08 / ESTRATÉGIAS ANALÍTICAS</h2>
+<div class="strategy"><b>01. Frequência móvel</b><p>Compara a distribuição nas últimas 10, 20 e 50 rodadas. Mudanças entre janelas podem indicar variação do histórico, não uma previsão.</p></div>
+<div class="strategy"><b>02. Repetição e alternância</b><p>Conta quantas vezes a mesma cor se repetiu ou mudou. Sequências anteriores não obrigam a próxima rodada a repetir ou alternar.</p></div>
+<div class="strategy"><b>03. Transição entre cores</b><p>Calcula a cor que mais apareceu depois da última cor registrada. Só exibe leitura quando há amostra mínima.</p></div>
+<div class="strategy"><b>04. Consenso de indicadores</b><p>Compara frequência recente e transição. Se os indicadores discordarem ou os dados forem poucos, o painel recomenda aguardar.</p></div>
+</section>
+<section class="panel"><h2>09 / LEITURA DO MODELO</h2><p class="sub" id="analysisText">Ainda não há dados suficientes para análise.</p><p class="sub">O modelo usa janela recente e transições históricas como indicadores descritivos. A força exibida mede apenas a quantidade e a concordância dos dados, não a chance real de uma cor sair.</p></section>
+</div>
+<section class="panel warning"><h2>⚠️ TRANSPARÊNCIA E JOGO RESPONSÁVEL</h2><p class="sub">WHITE BLAZE é uma ferramenta independente de registro e análise. Não tem conexão com a plataforma do jogo, não acessa resultados automaticamente e não consegue antecipar eventos aleatórios. Nenhum sinal é garantia de acerto ou lucro. Não aumente apostas para recuperar perdas; estabeleça limites e pare se atingir seu limite.</p></section>
+<footer>WHITE BLAZE · Sinais calculados sobre histórico externo · Dados salvos neste navegador<br>Fonte: Históricos Blaze (terceiro independente), não afiliado à Brabet.</footer>
+</main>
+<script>
+const KEY='whiteblaze_history_v2';
+let data=[];try{const saved=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(saved))data=saved.filter(x=>['W','R','B'].includes(x));}catch(e){}
+const $=id=>document.getElementById(id), names={W:'BRANCO',R:'VERMELHO',B:'PRETO'}, symbols={W:'⚪',R:'🔴',B:'⚫'};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){}}
+function add(v){data.push(v);save();render()}
+function undo(){data.pop();save();render()}
+function clearAll(){if(confirm('Apagar todo o histórico salvo neste navegador?')){data=[];save();render()}}
+function pct(n,t){return t?(100*n/t).toFixed(1)+'%':'0%'}
+function counts(arr){return {W:arr.filter(x=>x==='W').length,R:arr.filter(x=>x==='R').length,B:arr.filter(x=>x==='B').length}}
+function leader(c){return Object.keys(c).sort((a,b)=>c[b]-c[a])[0]}
+function render(){
+ const t=data.length,c=counts(data),last=data[t-1],recent=data.slice(-20),rc=counts(recent);
+ $('total').textContent=t;$('whites').textContent=c.W;$('reds').textContent=c.R;$('blacks').textContent=c.B;
+ $('pw').textContent=pct(c.W,t);$('pr').textContent=pct(c.R,t);$('pb').textContent=pct(c.B,t);
+ $('bw').style.width=pct(c.W,t);$('br').style.width=pct(c.R,t);$('bb').style.width=pct(c.B,t);
+ $('history').innerHTML=t?data.slice(-60).reverse().map(x=>`<span class="chip ${x.toLowerCase()}" title="${names[x]}">${x==='W'?'B':x==='R'?'V':'P'}</span>`).join(''):'<span class="muted">Nenhum resultado registrado.</span>';
+ const win=Number($('window').value),slice=data.slice(-win),wc=counts(slice),wl=leader(wc);
+ $('windowStats').innerHTML=['W','R','B'].map(x=>`<tr><td>${symbols[x]} ${names[x]}</td><td>${wc[x]}</td><td>${pct(wc[x],slice.length)}</td></tr>`).join('');
+ $('windowNote').textContent=`Base: ${slice.length} de ${t} resultados disponíveis. Cor mais frequente: ${slice.length?names[wl]:'—'}.`;
+ if(!t){$('lastColor').textContent='—';$('streak').textContent='—';$('maxStreak').textContent='—';$('switches').textContent='—';$('patternNote').textContent='Registre resultados para analisar sequências.';drawTransitions();setNoSignal('Registre pelo menos 30 resultados para iniciar a leitura experimental.');$('analysisText').textContent='Ainda não há dados suficientes para análise.';return}
+ $('lastColor').textContent=names[last];let run=1;for(let i=t-2;i>=0&&data[i]===last;i--)run++;
+ let max=1,cur=1,sw=0;for(let i=1;i<t;i++){if(data[i]===data[i-1])cur++;else{sw++;cur=1}max=Math.max(max,cur)}
+ $('streak').textContent=run+'x';$('maxStreak').textContent=max+'x';$('switches').textContent=sw;
+ $('patternNote').textContent=`A última cor registrada foi ${names[last]}. A sequência atual é de ${run} ocorrência(s). Isso não determina a próxima rodada.`;
+ drawTransitions();makeSignal(last);
+}
+function transitionCounts(){
+ const m={W:{W:0,R:0,B:0},R:{W:0,R:0,B:0},B:{W:0,R:0,B:0}};
+ for(let i=1;i<data.length;i++)m[data[i-1]][data[i]]++;
+ return m;
+}
+function drawTransitions(){
+ const m=transitionCounts();$('transitions').innerHTML=['W','R','B'].map(x=>{let n=m[x].W+m[x].R+m[x].B;return `<tr><td>${symbols[x]} ${names[x]}</td>${['W','R','B'].map(y=>`<td>${n?pct(m[x][y],n):'—'}</td>`).join('')}<td>${n}</td></tr>`}).join('');
+}
+function setNoSignal(msg){$('signalBall').className='signal-ball none';$('signalBall').textContent='?';$('signalTag').className='tag wait';$('signalTag').textContent='AGUARDAR';$('signalName').textContent='Sem sinal';$('signalReason').textContent=msg;$('strength').style.width='0%';$('strengthText').textContent='Evidência insuficiente';$('sampleText').textContent=data.length+' resultados';}
+function makeSignal(last){
+ const m=transitionCounts(),row=m[last],n=row.W+row.R+row.B,win=data.slice(-20),wc=counts(win),recentN=win.length;
+ if(data.length<30||recentN<15||n<8){setNoSignal('Amostra insuficiente. São necessários pelo menos 30 registros e 8 transições após a última cor.');$('analysisText').textContent='O painel está em modo de observação. Continue registrando resultados; não há base mínima para comparar os indicadores.';return}
+ const f=leader(wc),tr=leader(row),fShare=wc[f]/recentN,tShare=row[tr]/n;
+ const agrees=f===tr,marginF=fShare-(['W','R','B'].filter(x=>x!==f).map(x=>wc[x]/recentN).sort((a,b)=>b-a)[0]);
+ const marginT=tShare-(['W','R','B'].filter(x=>x!==tr).map(x=>row[x]/n).sort((a,b)=>b-a)[0]);
+ const strength=Math.max(0,Math.min(100,Math.round((Math.min(recentN,20)/20*35)+(Math.min(n,20)/20*35)+(agrees?20:0)+(Math.max(0,marginF)+Math.max(0,marginT))*50)));
+ if(!agrees||marginF<.08||marginT<.08){setNoSignal('Os indicadores não apresentam concordância suficiente. Melhor aguardar novos resultados.');$('strength').style.width=strength+'%';$('strengthText').textContent='Concordância baixa';$('analysisText').textContent=`Frequência recente aponta ${names[f]} (${pct(wc[f],recentN)}); transição após ${names[last]} aponta ${names[tr]} (${pct(row[tr],n)}). Como não há consenso robusto, o sistema não emite indicação de cor.`;return}
+ $('signalBall').className='signal-ball '+f.toLowerCase();$('signalBall').textContent=symbols[f];$('signalTag').className='tag good';$('signalTag').textContent='TENDÊNCIA OBSERVADA';$('signalName').textContent=names[f];$('signalReason').textContent='Os dois indicadores históricos apontam para a mesma cor; isto não é previsão.';$('strength').style.width=strength+'%';$('strengthText').textContent=strength>=70?'Concordância dos indicadores alta':'Concordância moderada';$('sampleText').textContent=`${recentN} recentes · ${n} transições`;
+ $('analysisText').textContent=`Leitura experimental: ${names[f]} lidera a janela de 20 resultados (${pct(wc[f],recentN)}) e também foi a cor mais frequente após ${names[last]} (${pct(row[f],n)} em ${n} transições). O consenso descreve o histórico e não representa probabilidade real da próxima rodada.`;
+}
+let autoEnabled=true, pollHandle=null, lastFingerprint='';
+const FEED='/.netlify/functions/double-results';
+function setFeedStatus(message,good=false){const el=$('feedStatus');el.textContent=(good?'● ':'● ')+message;el.style.color=good?'#55d1a2':'#e9c66b';}
+function normalizeFeed(items){
+ return items.map(x=>({color:x.color,number:x.number,time:x.time})).filter(x=>['W','R','B'].includes(x.color));
+}
+async function syncNow(){
+ setFeedStatus('consultando fonte externa...');
+ try{
+  const res=await fetch(FEED,{cache:'no-store'});
+  const payload=await res.json();
+  if(!res.ok||!payload.ok)throw new Error(payload.error||'Fonte indisponível');
+  const incoming=normalizeFeed(payload.results||[]);
+  if(!incoming.length)throw new Error('Nenhum resultado válido recebido');
+  // A fonte entrega do mais recente para o mais antigo; o analisador usa ordem cronológica.
+  const newestFirst=incoming;
+  const fingerprint=newestFirst.slice(0,12).map(x=>`${x.time}:${x.number}`).join('|');
+  if(fingerprint!==lastFingerprint){
+    lastFingerprint=fingerprint;
+    data=newestFirst.slice().reverse().map(x=>x.color);
+    save();render();
+    setFeedStatus(`conectado · ${incoming.length} resultados recebidos · última consulta ${new Date(payload.checkedAt).toLocaleTimeString('pt-BR')}`,true);
+  }else{
+    setFeedStatus(`conectado · sem novo resultado detectado · ${new Date(payload.checkedAt).toLocaleTimeString('pt-BR')}`,true);
+  }
+ }catch(err){
+  setFeedStatus(`sem atualização: ${err.message}. O histórico anterior foi mantido.`);
+ }
+}
+function startAuto(){
+ if(pollHandle)clearInterval(pollHandle);
+ if(autoEnabled){syncNow();pollHandle=setInterval(syncNow,25000);$('autoButton').textContent='Pausar atualização automática';}
+}
+function toggleAuto(){
+ autoEnabled=!autoEnabled;
+ if(!autoEnabled){if(pollHandle)clearInterval(pollHandle);pollHandle=null;$('autoButton').textContent='Retomar atualização automática';setFeedStatus('atualização automática pausada');}
+ else startAuto();
+}
+render();startAuto();
+</script></body></html>
